@@ -34,7 +34,7 @@ print("Message data = ",msg)
 
 a=input("Enter you msg")
 
-key=Fernet.genrate_key()
+key=Fernet.generate_key()
 
 fernet=Fernet(key)
 
