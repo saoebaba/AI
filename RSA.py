@@ -2,14 +2,13 @@ import math
 from cryptography.fernet import Fernet
 
 def GCD(a,b):
-    if b==0:
+    if (b==0):
         return a
     else:
-        return GCD(b,a%b)
-
-
-p=int(input("Enter your first prime number p: "))
-q=int(input("Enter your second prime number q: "))
+        return(b,a%b)
+    
+p=int(input(" p :"))
+q=int(input(" q :"))
 
 n=p*q
 
@@ -22,26 +21,24 @@ while(e<phi):
     if(GCD(e,phi)==1):
         break
     else:
-        e+=1
+        p+=1
+    
+d=int(((k*phi)+1)/e)
 
-
-d=(1+(k*phi))/e
 
 print(f"Public Key (e,n) : ({e},{n})")
-print(f"Private Key (d,n) : ({int(d)},{n})")
+print(f"Private Key (d,n) : ({d},{n})")
 
-a=input("Enter you msg : ")
+msg = input("Enter you Message : ")
 
 
-key=Fernet.generate_key()
+key = Fernet.generate_key()
 
-fernet=Fernet(key)
+fernet = Fernet(key)
 
-encMessaage=fernet.encrypt(a.encode())
+encryptedMSG = fernet.encrypt(msg.encode())
+decryptedMSG = fernet.decrypt(encryptedMSG).decode()
 
-print("original string : ",a)
-print("Encrypted String : ", encMessaage)
-
-decMessage = fernet.decrypt(encMessaage).decode()
-
-print("decrypted string : ",decMessage)
+print("original string : ", msg)
+print("Encrypted String : ", encryptedMSG)
+print("decrypted string : ", decryptedMSG)
