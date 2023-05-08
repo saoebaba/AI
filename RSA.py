@@ -21,7 +21,7 @@ while(e<phi):
     if(GCD(e,phi)==1):
         break
     else:
-        p+=1
+        e+=1
     
 d=int(((k*phi)+1)/e)
 
