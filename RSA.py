@@ -32,7 +32,7 @@ msg=12.0
 
 print("Message data = ",msg)
 
-a=input("Enter you msg")
+a=input("Enter you msg : ")
 
 key=Fernet.generate_key()
 
