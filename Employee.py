@@ -71,23 +71,25 @@ sc = StandardScaler()
 X_train = sc.fit_transform(X_train)
 X_test = sc.transform(X_test)
 
-X_train.shape
+print("X_train.shape :",X_train.shape)
 
-X_test.shape
+print("X_test.shape : ",X_test.shape)
 
-from sklearn.ensemble import RandomForestClassifier
-classifier_rfg=RandomForestClassifier(random_state=33,n_estimators=23)
-parameters=[{'min_samples_split':[2,3,4,5],'criterion':['gini','entropy'],'min_samples_l
-model_gridrf=GridSearchCV(estimator=classifier_rfg, param_grid=parameters, scoring='accu
-model_gridrf.fit(X_train,y_train)
-                          
-model_gridrf.best_params_
-                          
-y_predict_rf = model_gridrf.predict(X_test)
-                         
-print(accuracy_score(y_test,y_predict_rf))
-print(classification_report(y_test,y_predict_rf))
-                          
-confusion_matrix(y_test,y_predict_rf)
+from sklearn.linear_model import LogisticRegression
+lm = LogisticRegression()
+lm.fit(X_train, y_train)
+predictions = lm.predict(X_test)
+
+from sklearn.metrics import confusion_matrix
+cm = confusion_matrix(y_test, predictions)
+print(f'''Confusion matrix :\n
+               | Positive Prediction\t| Negative Prediction
+---------------+------------------------+----------------------
+Positive Class | True Positive (TP) {cm[0, 0]}\t| False Negative (FN) {cm[0, 1]}
+---------------+------------------------+----------------------
+Negative Class | False Positive (FP) {cm[1, 0]}\t| True Negative (TN) {cm[1, 1]}\n\n''')
+
+print(f"Accuracy : {(TP+TN)/(TP+FP+TN+FN)}  ")
+print(f'Error Rate: {(FP+FN)/(TP+TN+FN+FP)}')
 
 
